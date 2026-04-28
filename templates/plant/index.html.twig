@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reconnaissance de plante{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_row(form.photo) }}
+{#    {{ form_row(form.submit) }}#}
+    <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
+
+    {% if error %}
+        <div>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    {% if result %}
+
+        <div>
+            <h1>Résultat</h1>
+            <div>
+                <p>Une plante a été identifiée !</p>
+            </div>
+        </div>
+
+        <div class="overview">
+            <div class="plant-card">
+                <div class="plant-card__header">
+                    <p>{{ result.commonName ?? 'Non déterminé' }}</p>
+                    <p>{{ result.scientificName ?? 'Non déterminé' }}</p>
+                </div>
+                <div class="plant-card__content">
+                    <p>{{ result.description ?? 'Aucune description' }}</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-item__content">
+                    <p>Température</p>
+                    <p>{{ result.temperature_number ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-item__content">
+                    <p>Eau</p>
+                    <p>{{ result.watering_small ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-item__content">
+                    <p>Exposition</p>
+                    <p>{{ result.exposure_small ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-item__content">
+                    <p>Rempotage</p>
+                    <p>{{ result.repotting_small ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <p><strong>Famille: </strong>{{ result.family ?? 'Non déterminé' }}</p>
+        <p><strong>Confiance :</strong>
+            {% if result.confidence is not null %}
+                {{ (result.confidence * 100)|round(0) }}%
+            {% else %}
+                Non disponible
+            {% endif %}
+        </p>
+        <p><strong>Arrosage : </strong>{{ result.watering ?? 'Non déterminé' }}</p>
+
+        <p><strong>Rempotage : </strong>{{ result.repotting ?? 'Non déterminé' }}</p>
+        <p><strong>Exposition :</strong>{{ result.exposure ?? 'Non déterminé' }}</p>
+        <p><strong>Maladie/Parasite :</strong>{{ result.disease ?? 'Non déterminé' }}</p>
+        <p><strong>Humidité : </strong>{{ result.humidity ?? 'Non déterminé' }}</p>
+        <p><strong>Température : </strong>{{ result.temperature ?? 'Non déterminé' }}</p>
+        <p><strong>Substrat : </strong>{{ result.soil ?? 'Non déterminé' }}</p>
+        <p><strong>Résultat fiable :</strong> {{ result.isSafeGuess ? 'Oui' : 'Non' }}</p>
+
+        {% if result.careTips is not empty %}
+            <h3>Conseils</h3>
+            <ul>
+                {% for tip in result.careTips %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}
