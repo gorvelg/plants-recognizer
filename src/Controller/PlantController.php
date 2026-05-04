@@ -52,7 +52,6 @@ class PlantController extends AbstractController
             }
         }
 
-        dump($result);
 
         return $this->render('plant/index.html.twig', [
             'form' => $form->createView(),

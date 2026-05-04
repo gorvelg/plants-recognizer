@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\DTO\PlantRecognitionResult;
+use App\Dto\PlantRecognitionResult;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PlantRecognitionService
@@ -64,18 +64,31 @@ soil,
 repotting,
 repotting_small,
 description,
+planting_period,
+planting_distance,
+fertilizer,
+height,
+width,
+foliage,
+foliage_type,
+shape,
+flowers,
+bloom_period,
+fruits,
+toxicity,
 care_tips,
 is_safe_guess
 
 Contraintes :
 - confidence = nombre entre 0 et 1
 - temperature = courte phrase
-- temperature_number = plage de temperature
+- temperature_number = plage de temperature en degré celsius.
 - exposure = courte phrase
 - exposure_small = un ou deux mots maximum
 - watering = courte phrase
 - watering_small = un ou deux mots maximum
 - repotting_small = uniquement la periodicité, sans faire de phrase.
+- toxicity = si toxique pour les animaux, mettre true sinon false.
 - care_tips = tableau de 3 conseils maximum
 - si l'image est insuffisante, propose la meilleure hypothèse mais mets is_safe_guess à false
 - n'invente pas une certitude

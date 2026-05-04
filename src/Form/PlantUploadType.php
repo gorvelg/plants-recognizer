@@ -14,7 +14,10 @@ class PlantUploadType extends AbstractType
     {
         $builder
             ->add('photo', FileType::class, [
-                'label' => 'Photo de la plante',
+                'label' => 'Télécharger une image',
+                'row_attr' => [
+                    'class' => 'input-download'
+                ],
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [
