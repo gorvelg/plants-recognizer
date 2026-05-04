@@ -250,6 +250,24 @@ p {
     gap: 30px;
 }
 /* Formulaire */
+.form-download {
+        width: fit-content;
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        gap: 10px;
+}
+.form-download__title{
+    font-size: 40px;
+    color: #212121;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-download__constraint{
+    color: #9ca3af;
+    font-size: 12px;
+}
 
 .input-download label{
     padding: 4px 16px;
@@ -259,7 +277,27 @@ p {
     color: white;
 }
 
-.input-download input {
+.input-download input, .form-download__submit {
     display: none;
+}
+
+.input-download label::before {
+    content: '●';
+    margin-right: 8px;
+}
+.input-download label {
+    padding: 8px 16px;
+    width: fit-content;
+    border-radius: 4px;
+    background-color: #FFC800;
+    color: #2C2825;
+    text-transform: uppercase;
+    display: block;
+    font-size: 18px;
+    font-family: 'Hanuman';
+}
+
+turbo-frame[busy] {
+    opacity: 0.5;
 }
 
