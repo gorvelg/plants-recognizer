@@ -6,11 +6,15 @@
 
     <ul class="sidebar__menu">
         <li class="sidebar__menu-item">
-            <a href="#" class="sidebar__menu-link sidebar__menu-link--plants">Mes plantes</a>
+            <a href="{{ path('app_index_plant') }}" class="sidebar__menu-link sidebar__menu-link--plants">Mes plantes</a>
         </li>
 
         <li class="sidebar__menu-item">
             <a href="#" class="sidebar__menu-link sidebar__menu-link--task">Mes tâches</a>
+        </li>
+
+        <li class="sidebar__menu-item">
+            <a href="{{ path('plant_index') }}" class="sidebar__menu-link sidebar__menu-link--recognizer">Identifier une plante</a>
         </li>
 
         <li class="sidebar__menu-item">

@@ -1,0 +1,315 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reconnaissance de plante{% endblock %}
+
+{% block body %}
+
+    <turbo-frame id="plant-recognition">
+        <p class="form-download__title">Identifiez une plante rapidement !</p>
+        <p class="form-download__desc">Identifiez instantanément vos plantes, fleurs et arbres. Obtenez des conseils d’entretien personnalisés, découvrez leurs besoins essentiels et prenez soin de votre jardin au quotidien.</p>
+        {{ form_start(form, {
+            attr: {
+                enctype: 'multipart/form-data',
+                'data-turbo-frame': 'plant-recognition',
+                class: 'form-download'
+            }
+        }) }}
+        {{ form_row(form.photo) }}
+        <span class="file-name">Aucun fichier choisi</span>
+        <span class="form-download__constraint">Supporte JPG, PNG, et WEBP, jusqu'à 8Mb</span>
+        <button class="form-download__submit" type="submit">Envoyer</button>
+        {{ form_end(form) }}
+
+        {% if error %}
+            <div>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if result %}
+
+            {% set cards = [
+                {
+                    title: 'Arrosage',
+                    text: result.watering ?? 'Non déterminé',
+                    icon: 'water',
+                    category: 'requirement'
+                },
+                {
+                    title: 'Rempotage',
+                    text: result.repotting ?? 'Non déterminé',
+                    icon: 'potted_plant',
+                    category: 'plant_care'
+                },
+                {
+                    title: 'Exposition',
+                    text: result.exposure ?? 'Non déterminé',
+                    icon: 'sun',
+                    category: 'requirement'
+                },
+                {
+                    title: 'Maladie / Parasite',
+                    text: result.disease ?? 'Non déterminé',
+                    icon: 'flower',
+                    category: 'description'
+                },
+                {
+                    title: 'Humidité',
+                    text: result.humidity ?? 'Non déterminé',
+                    icon: 'wet',
+                    category: 'requirement'
+                },
+                {
+                    title: 'Température',
+                    text: result.temperature ?? 'Non déterminé',
+                    icon: 'temperature',
+                    category: 'requirement'
+                },
+                {
+                    title: 'Substrat',
+                    text: result.soil ?? 'Non déterminé',
+                    icon: 'soil',
+                    category: 'requirement'
+                },
+                {
+                    title: 'Résultat fiable',
+                    text: result.isSafeGuess ? 'Oui' : 'Non',
+                    icon: 'flower',
+                    category: 'description'
+                },
+                {
+                    title: 'Période de plantation',
+                    text: result.planting_period ?? 'Non déterminé',
+                    icon: 'clock',
+                    category: 'plant_care'
+                },
+                {
+                    title: 'Distance de plantation',
+                    text: result.planting_distance ?? 'Non déterminé',
+                    icon: 'space',
+                    category: 'plant_care'
+                },
+                {
+                    title: 'Engrais',
+                    text: result.fertilizer ?? 'Non déterminé',
+                    icon: 'compost',
+                    category: 'plant_care'
+                },
+                {
+                    title: 'Hauteur',
+                    text: result.height ?? 'Non déterminé',
+                    icon: 'height',
+                    category: 'description'
+                },
+                {
+                    title: 'Largeur',
+                    text: result.width ?? 'Non déterminé',
+                    icon: 'width',
+                    category: 'description'
+                },
+                {
+                    title: 'Feuillage',
+                    text: result.foliage ?? 'Non déterminé',
+                    icon: 'maple_leaf',
+                    category: 'description'
+                },
+                {
+                    title: 'Type de feuillage',
+                    text: result.foliage_type ?? 'Non déterminé',
+                    icon: 'autumn',
+                    category: 'description'
+                },
+                {
+                    title: 'Forme',
+                    text: result.shape ?? 'Non déterminé',
+                    icon: 'circle',
+                    category: 'description'
+                },
+                {
+                    title: 'Fleurs',
+                    text: result.flowers ?? 'Non déterminé',
+                    icon: 'flower',
+                    category: 'description'
+                },
+                {
+                    title: 'Période de floraison',
+                    text: result.bloom_period ?? 'Non déterminé',
+                    icon: 'flower',
+                    category: 'description'
+                },
+                {
+                    title: 'Fruits',
+                    text: result.fruits ?? 'Non déterminé',
+                    icon: 'apple',
+                    category: 'description'
+                }
+            ] %}
+
+            {% set categories = {
+                requirement: 'Besoins de la plante',
+                plant_care: 'Entretien et plantation',
+                description: 'Description physique',
+                health: 'Santé'
+            } %}
+
+            <div>
+                <div class="result-header">
+                    <h1>Résultat</h1>
+
+                    <div class="result-success">
+                        {{ include('@icons/check.svg') }}
+                        <p>Une plante a été identifiée !</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview">
+                <div class="plant-card">
+                    <div class="plant-card__header">
+                        <div class="plant-card__header-row">
+                            <div class="plant-card__infos">
+                                <h2 class="plant-card__common-name">
+                                    {{ result.commonName ?? 'Non déterminé' }}
+                                </h2>
+
+                                <p class="plant-card__scientific-name">
+                                    {{ result.scientificName ?? 'Non déterminé' }}
+                                </p>
+                            </div>
+
+                            <form method="post" action="{{ path('plant_save') }}">
+                                <input type="hidden" name="common_name" value="{{ result.commonName }}">
+                                <input type="hidden" name="scientific_name" value="{{ result.scientificName }}">
+                                <input type="hidden" name="watering" value="{{ result.watering }}">
+                                <input type="hidden" name="watering_small" value="{{ result.watering_small }}">
+                                <input type="hidden" name="exposure" value="{{ result.exposure }}">
+                                <input type="hidden" name="exposure_small" value="{{ result.exposure_small }}">
+                                <input type="hidden" name="soil" value="{{ result.soil }}">
+                                <input type="hidden" name="family" value="{{ result.family }}">
+                                <input type="hidden" name="disease" value="{{ result.disease }}">
+                                <input type="hidden" name="repotting" value="{{ result.repotting }}">
+                                <input type="hidden" name="repotting_small" value="{{ result.repotting_small }}">
+                                <input type="hidden" name="humidity" value="{{ result.humidity }}">
+                                <input type="hidden" name="temperature" value="{{ result.temperature }}">
+                                <input type="hidden" name="temperature_number" value="{{ result.temperature_number }}">
+                                <input type="hidden" name="confidence" value="{{ result.confidence }}">
+                                <input type="hidden" name="description" value="{{ result.description }}">
+                                <input type="hidden" name="planting_period" value="{{ result.planting_period }}">
+                                <input type="hidden" name="planting_distance" value="{{ result.planting_distance }}">
+                                <input type="hidden" name="fertilizer" value="{{ result.fertilizer }}">
+                                <input type="hidden" name="height" value="{{ result.height }}">
+                                <input type="hidden" name="width" value="{{ result.width }}">
+                                <input type="hidden" name="foliage" value="{{ result.foliage }}">
+                                <input type="hidden" name="foliage_type" value="{{ result.foliage_type }}">
+                                <input type="hidden" name="shape" value="{{ result.shape }}">
+                                <input type="hidden" name="flowers" value="{{ result.flowers }}">
+                                <input type="hidden" name="bloom_period" value="{{ result.bloom_period }}">
+                                <input type="hidden" name="fruits" value="{{ result.fruits }}">
+                                <input type="hidden" name="toxicity" value="{{ result.toxicity ? 1 : 0 }}">
+                                <input type="hidden" name="is_safe_guess" value="{{ result.isSafeGuess ? 1 : 0 }}">
+
+                                {% for tip in result.careTips %}
+                                    <input type="hidden" name="care_tips[]" value="{{ tip }}">
+                                {% endfor %}
+
+                                <button class="btn" type="submit">Enregistrer la fiche</button>
+                            </form>
+                        </div>
+
+                        <div class="plant-card__badges">
+                            {% if result.toxicity %}
+                                <div class="plant-card__badge plant-card__badge--toxicity">
+                                    {{ include('@icons/nuclear.svg') }}
+
+                                    <p>
+                                        Toxique pour les <br>animaux
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            <div class="plant-card__badge plant-card__badge--family">
+                                <p>{{ result.family ?? 'Aucune famille' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plant-card__content">
+                        <h3>Description</h3>
+                        <p>{{ result.description ?? 'Aucune description' }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    {{ include('@icons/temperature.svg') }}
+
+                    <div class="detail-item__content">
+                        <h3>Température</h3>
+                        <p>{{ result.temperature_number ?? 'Non déterminé' }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    {{ include('@icons/water.svg') }}
+
+                    <div class="detail-item__content">
+                        <h3>Eau</h3>
+                        <p>{{ result.watering_small ?? 'Non déterminé' }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    {{ include('@icons/sun.svg') }}
+
+                    <div class="detail-item__content">
+                        <h3>Exposition</h3>
+                        <p>{{ result.exposure_small ?? 'Non déterminé' }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    {{ include('@icons/potted_plant.svg') }}
+
+                    <div class="detail-item__content">
+                        <h3>Rempotage</h3>
+                        <p>{{ result.repotting_small ?? 'Non déterminé' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards-sections">
+                {% for categoryKey, categoryTitle in categories %}
+                    <section class="cards-section cards-section--{{ categoryKey }}">
+                        <h2 class="cards-section__title">{{ categoryTitle }}</h2>
+
+                        <div class="cards-section__grid">
+                            {% for card in cards %}
+                                {% if card.category == categoryKey %}
+                                    {% include 'components/_card.html.twig' with {
+                                        title: card.title,
+                                        text: card.text,
+                                        category: card.category,
+                                        icon: card.icon
+                                    } only %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+
+            {% if result.careTips is not empty %}
+                <div class="care-tips">
+                    <h3 class="care-tips__title">Conseils</h3>
+
+                    <ul class="care-tips__list">
+                        {% for tip in result.careTips %}
+                            <li class="care-tips__item">{{ tip }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+        {% endif %}
+    </turbo-frame>
+
+{% endblock %}

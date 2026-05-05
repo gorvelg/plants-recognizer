@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PlantController extends AbstractController
+class PlantRecognizerController extends AbstractController
 {
     #[Route('/recognize', name: 'plant_index', methods: ['GET', 'POST'])]
     public function index(
@@ -53,7 +53,7 @@ class PlantController extends AbstractController
         }
 
 
-        return $this->render('plant/index.html.twig', [
+        return $this->render('plant_recognizer/index.html.twig', [
             'form' => $form->createView(),
             'result' => $result,
             'error' => $error,

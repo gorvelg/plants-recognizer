@@ -74,6 +74,9 @@ a{
 .sidebar__menu-link--account::before{
     background-image: url("../icons/person-outline.svg");
 }
+.sidebar__menu-link--recognizer::before{
+    background-image: url("../icons/magnifying-glass-search.svg");
+}
 .sidebar__menu-link--plants::before{
     background-image: url("../icons/leaf-outline.svg");
 }
@@ -82,6 +85,9 @@ a{
 }
 .sidebar__menu-link--plants:hover::before {
     background-image: url("../icons/leaf-outline-green.svg");
+}
+.sidebar__menu-link--recognizer:hover::before{
+    background-image: url("../icons/magnifying-glass-search-green.svg");
 }
 .sidebar__menu-link--account:hover::before {
     background-image: url("../icons/person-outline-green.svg");
@@ -131,6 +137,11 @@ p {
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
+.plant-card__header-row{
+    display: flex;
+    justify-content: space-between;
+}
+
 .plant-card__infos {
     margin-bottom: 20px;
 }
@@ -158,6 +169,24 @@ p {
     line-height: 110%;
     font-style: italic;
 }
+
+.btn {
+    padding: 8px 16px;
+    width: fit-content;
+    border-radius: 4px;
+    background-color: #FFC800;
+    color: #2C2825;
+    text-transform: uppercase;
+    display: block;
+    font-size: 11px;
+    font-family: 'Hanuman';
+    border: none;
+}
+.btn::before {
+    content: '●';
+    margin-right: 8px;
+}
+
 .plant-card__badges {
     display: flex;
     gap: 8px;
@@ -353,6 +382,7 @@ turbo-frame[busy] {
     font-weight: 700;
     font-family: 'Caprasimo';
     font-size: 40px;
+    color: #212121;
 }
 
 .dashboard-card__text {

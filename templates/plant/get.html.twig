@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche plante{% endblock %}
+
+{% block body %}
+
+    <turbo-frame id="plant-recognition">
+
+        {% set cards = [
+            {
+                title: 'Arrosage',
+                text: plant.watering ?? 'Non déterminé',
+                icon: 'water',
+                category: 'requirement'
+            },
+            {
+                title: 'Rempotage',
+                text: plant.repotting ?? 'Non déterminé',
+                icon: 'potted_plant',
+                category: 'plant_care'
+            },
+            {
+                title: 'Exposition',
+                text: plant.exposure ?? 'Non déterminé',
+                icon: 'sun',
+                category: 'requirement'
+            },
+            {
+                title: 'Maladie / Parasite',
+                text: plant.disease ?? 'Non déterminé',
+                icon: 'flower',
+                category: 'health'
+            },
+            {
+                title: 'Humidité',
+                text: plant.humidity ?? 'Non déterminé',
+                icon: 'wet',
+                category: 'requirement'
+            },
+            {
+                title: 'Température',
+                text: plant.temperature ?? 'Non déterminé',
+                icon: 'temperature',
+                category: 'requirement'
+            },
+            {
+                title: 'Substrat',
+                text: plant.soil ?? 'Non déterminé',
+                icon: 'soil',
+                category: 'requirement'
+            },
+
+            {
+                title: 'Période de plantation',
+                text: plant.plantingPeriod ?? 'Non déterminé',
+                icon: 'clock',
+                category: 'plant_care'
+            },
+            {
+                title: 'Distance de plantation',
+                text: plant.plantingDistance ?? 'Non déterminé',
+                icon: 'space',
+                category: 'plant_care'
+            },
+            {
+                title: 'Engrais',
+                text: plant.fertilizer ?? 'Non déterminé',
+                icon: 'compost',
+                category: 'plant_care'
+            },
+            {
+                title: 'Hauteur',
+                text: plant.height ?? 'Non déterminé',
+                icon: 'height',
+                category: 'description'
+            },
+            {
+                title: 'Largeur',
+                text: plant.width ?? 'Non déterminé',
+                icon: 'width',
+                category: 'description'
+            },
+            {
+                title: 'Feuillage',
+                text: plant.foliage ?? 'Non déterminé',
+                icon: 'maple_leaf',
+                category: 'description'
+            },
+            {
+                title: 'Type de feuillage',
+                text: plant.foliageType ?? 'Non déterminé',
+                icon: 'autumn',
+                category: 'description'
+            },
+            {
+                title: 'Forme',
+                text: plant.shape ?? 'Non déterminé',
+                icon: 'circle',
+                category: 'description'
+            },
+            {
+                title: 'Fleurs',
+                text: plant.flowers ?? 'Non déterminé',
+                icon: 'flower',
+                category: 'description'
+            },
+            {
+                title: 'Période de floraison',
+                text: plant.bloomPeriod ?? 'Non déterminé',
+                icon: 'flower',
+                category: 'description'
+            },
+            {
+                title: 'Fruits',
+                text: plant.fruits ?? 'Non déterminé',
+                icon: 'apple',
+                category: 'description'
+            }
+        ] %}
+
+        {% set categories = {
+            requirement: 'Besoins de la plante',
+            plant_care: 'Entretien et plantation',
+            description: 'Description physique',
+            health: 'Santé'
+        } %}
+
+        <div>
+            <div class="result-header">
+                <h1>Fiche plante</h1>
+
+                <div class="result-success">
+                    {{ include('@icons/check.svg') }}
+                    <p>Plante enregistrée</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="overview">
+            <div class="plant-card">
+                <div class="plant-card__header">
+                    <div class="plant-card__header-row">
+                        <div class="plant-card__infos">
+                            <h2 class="plant-card__common-name">
+                                {{ plant.commonName ?? 'Non déterminé' }}
+                            </h2>
+
+                            <p class="plant-card__scientific-name">
+                                {{ plant.scientificName ?? 'Non déterminé' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="plant-card__badges">
+{#                        {% if toxicity %}#}
+{#                            <div class="plant-card__badge plant-card__badge--toxicity">#}
+{#                                {{ include('@icons/nuclear.svg') }}#}
+
+{#                                <p>#}
+{#                                    Toxique pour les <br>animaux#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+
+                        <div class="plant-card__badge plant-card__badge--family">
+                            <p>{{ plant.family ?? 'Aucune famille' }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card__content">
+                    <h3>Description</h3>
+                    <p>{{ plant.description ?? 'Aucune description' }}</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                {{ include('@icons/temperature.svg') }}
+
+                <div class="detail-item__content">
+                    <h3>Température</h3>
+                    <p>{{ plant.temperatureNumber ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                {{ include('@icons/water.svg') }}
+
+                <div class="detail-item__content">
+                    <h3>Eau</h3>
+                    <p>{{ plant.wateringSmall ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                {{ include('@icons/sun.svg') }}
+
+                <div class="detail-item__content">
+                    <h3>Exposition</h3>
+                    <p>{{ plant.exposureSmall ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                {{ include('@icons/potted_plant.svg') }}
+
+                <div class="detail-item__content">
+                    <h3>Rempotage</h3>
+                    <p>{{ plant.repottingSmall ?? 'Non déterminé' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards-sections">
+            {% for categoryKey, categoryTitle in categories %}
+                <section class="cards-section cards-section--{{ categoryKey }}">
+                    <h2 class="cards-section__title">{{ categoryTitle }}</h2>
+
+                    <div class="cards-section__grid">
+                        {% for card in cards %}
+                            {% if card.category == categoryKey %}
+                                {% include 'components/_card.html.twig' with {
+                                    title: card.title,
+                                    text: card.text,
+                                    category: card.category,
+                                    icon: card.icon
+                                } only %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+
+{#        {% if careTips is not empty %}#}
+{#            <div class="care-tips">#}
+{#                <h3 class="care-tips__title">Conseils</h3>#}
+
+{#                <ul class="care-tips__list">#}
+{#                    {% for tip in careTips %}#}
+{#                        <li class="care-tips__item">{{ tip }}</li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        {% endif %}#}
+    </turbo-frame>
+
+{% endblock %}
