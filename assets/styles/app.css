@@ -55,6 +55,7 @@ a{
     text-transform: uppercase;
     font-size: 14px;
     color: #212121;
+    transition: color, transform .5s ease;
 }
 
 .sidebar__menu-link::before {
@@ -75,6 +76,19 @@ a{
 }
 .sidebar__menu-link--plants::before{
     background-image: url("../icons/leaf-outline.svg");
+}
+.sidebar__menu-link--task::before{
+    background-image: url("../icons/calendar-clear-outline-green.svg");
+}
+.sidebar__menu-link--plants:hover::before {
+    background-image: url("../icons/leaf-outline-green.svg");
+}
+.sidebar__menu-link--account:hover::before {
+    background-image: url("../icons/person-outline-green.svg");
+}
+.sidebar__menu-link:hover {
+    color: #496D4A;
+    transform: translateX(10px);
 }
 
 .wrapper {
@@ -316,7 +330,7 @@ turbo-frame[busy] {
     border-radius: 24px;
     padding: 24px;
     text-decoration: none;
-
+    transition: background-color .5s ease;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -369,13 +383,23 @@ turbo-frame[busy] {
     background-color: #FEE4DF;
 }
 
+.dashboard-card--plants:hover{
+    background-color: #fdd1c9;
+}
+
 .dashboard-card--tasks {
     background-color: #FFF0DE;
 }
-
+.dashboard-card--tasks:hover {
+    background-color: #ffdfb8;
+}
 .dashboard-card--recognizer {
     background-color: #EAEBE6;
     grid-column: 1 / -1;
+}
+
+.dashboard-card--recognizer:hover {
+    background-color: #dbddd5;
 }
 
 
