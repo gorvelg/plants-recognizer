@@ -301,3 +301,81 @@ turbo-frame[busy] {
     opacity: 0.5;
 }
 
+/* Dashboard */
+
+.dashboard__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 75px;
+    margin-top: 50px;
+}
+
+.dashboard-card {
+    position: relative;
+    height: 250px;
+    border-radius: 24px;
+    padding: 24px;
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    overflow: visible;
+
+    /*
+      top: -60px autorisé
+      right: 0 coupé
+      bottom: 0 coupé
+      left: 0 coupé
+    */
+    clip-path: inset(-60px 0 0 0 round 24px);
+}
+
+.dashboard-card__title {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-weight: 700;
+    font-family: 'Caprasimo';
+    font-size: 40px;
+}
+
+.dashboard-card__text {
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin-top: 8px;
+    color: #575757;
+    text-transform: uppercase;
+}
+
+.dashboard-card__img {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.5s ease;
+}
+
+.dashboard-card:hover .dashboard-card__img {
+    transform: scale(1.05);
+}
+
+/* Variantes */
+
+.dashboard-card--plants {
+    background-color: #FEE4DF;
+}
+
+.dashboard-card--tasks {
+    background-color: #FFF0DE;
+}
+
+.dashboard-card--recognizer {
+    background-color: #EAEBE6;
+    grid-column: 1 / -1;
+}
+
+

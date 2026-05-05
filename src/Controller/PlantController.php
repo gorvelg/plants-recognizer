@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlantController extends AbstractController
 {
-    #[Route('/', name: 'plant_index', methods: ['GET', 'POST'])]
+    #[Route('/recognize', name: 'plant_index', methods: ['GET', 'POST'])]
     public function index(
         Request $request,
         PlantRecognitionService $plantRecognitionService

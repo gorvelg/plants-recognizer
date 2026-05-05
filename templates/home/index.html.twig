@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <section class="dashboard">
+        <div class="dashboard__grid">
+            <a href="#" class="dashboard-card dashboard-card--plants">
+                <div class="dashboard-card__clip">
+                    <div class="dashboard-card__content">
+                        <p class="dashboard-card__title">Mes plantes</p>
+                        <span class="dashboard-card__text">0 plante</span>
+                    </div>
+                </div>
+
+                <img
+                    class="dashboard-card__img dashboard-card__img--plants"
+                    src="{{ asset('images/plants.png') }}"
+                    alt="Plante"
+                >
+            </a>
+
+            <a href="#" class="dashboard-card dashboard-card--tasks">
+                <div class="dashboard-card__clip">
+                    <div class="dashboard-card__content">
+                        <p class="dashboard-card__title">Mes tâches</p>
+                        <span class="dashboard-card__text">0 tâche en cours</span>
+                    </div>
+                </div>
+
+                <img
+                    class="dashboard-card__img dashboard-card__img--tasks"
+                    src="{{ asset('images/watering-can.png') }}"
+                    alt="Arrosoir"
+                >
+            </a>
+
+            <a href="{{ path('plant_index') }}" class="dashboard-card dashboard-card--recognizer">
+                <div class="dashboard-card__clip">
+                    <div class="dashboard-card__content">
+                        <p class="dashboard-card__title">Identifier une plante</p>
+                        <span class="dashboard-card__text">
+                            Reconnaître instantanément des plantes et obtenir des conseils
+                        </span>
+                    </div>
+                </div>
+
+                <img
+                    class="dashboard-card__img dashboard-card__img--recognizer"
+                    src="{{ asset('images/search-plant.png') }}"
+                    alt="Main avec une loupe devant une plante"
+                >
+            </a>
+        </div>
+    </section>
+{% endblock %}
