@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <turbo-frame id="plant-recognition">
+    <turbo-frame id="plant-recognition" data-controller="progress">
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class=" flash flash-{{ label }}">
@@ -12,12 +12,26 @@
                 </div>
             {% endfor %}
         {% endfor %}
+
+        <div
+            class="progress"
+            id="upload-progress"
+            hidden
+            data-progress-target="container"
+        >
+            <div
+                class="progress__bar"
+                data-progress-target="bar"
+            ></div>
+        </div>
+
         <p class="form-download__title">Identifiez une plante rapidement !</p>
         <p class="form-download__desc">Identifiez instantanément vos plantes, fleurs et arbres. Obtenez des conseils d’entretien personnalisés, découvrez leurs besoins essentiels et prenez soin de votre jardin au quotidien.</p>
         {{ form_start(form, {
             attr: {
                 enctype: 'multipart/form-data',
                 'data-turbo-frame': 'plant-recognition',
+                'data-action': 'submit->progress#start',
                 class: 'form-download'
             }
         }) }}
