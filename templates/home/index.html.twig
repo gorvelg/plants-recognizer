@@ -9,7 +9,9 @@
                 <div class="dashboard-card__clip">
                     <div class="dashboard-card__content">
                         <p class="dashboard-card__title">Mes plantes</p>
-                        <span class="dashboard-card__text">0 plante</span>
+                        <span class="dashboard-card__text">
+                            {{ plantCount }} {{ plantCount > 1 ? 'plantes' : 'plante' }}
+                        </span>
                     </div>
                 </div>
 

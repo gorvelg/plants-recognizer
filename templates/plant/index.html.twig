@@ -5,7 +5,11 @@
 {% block body %}
     <ul>
         {% for plant in plants %}
-            <li>{{ plant.commonName }}</li>
+            <li>
+                <a href="{{ path('app_get_plant', {'plant': plant.id}) }}">
+                {{ plant.commonName }}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 

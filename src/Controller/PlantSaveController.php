@@ -16,6 +16,23 @@ final class PlantSaveController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
+
+        $scientificName = $request->request->get('scientific_name');
+
+        if (!$scientificName) {
+            $this->addFlash('error', 'Impossible d’enregistrer cette fiche.');
+            return $this->redirectToRoute('plant_index');
+        }
+
+        $existingPlant = $entityManager->getRepository(Plant::class)->findOneBy([
+            'scientificName' => $scientificName
+        ]);
+
+        if ($existingPlant) {
+            $this->addFlash('info', 'Cette plante a déjà été enregistrée.');
+            return $this->redirectToRoute('plant_index');
+        }
+
         $plant = new Plant();
 
         $plant

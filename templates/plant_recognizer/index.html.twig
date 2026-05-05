@@ -5,6 +5,13 @@
 {% block body %}
 
     <turbo-frame id="plant-recognition">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class=" flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         <p class="form-download__title">Identifiez une plante rapidement !</p>
         <p class="form-download__desc">Identifiez instantanément vos plantes, fleurs et arbres. Obtenez des conseils d’entretien personnalisés, découvrez leurs besoins essentiels et prenez soin de votre jardin au quotidien.</p>
         {{ form_start(form, {

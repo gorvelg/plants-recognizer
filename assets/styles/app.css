@@ -22,7 +22,24 @@ ul {
 a{
     text-decoration: none;
 }
+.flash {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
+.flash-info {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
 
 .sidebar {
     position: fixed;
@@ -180,11 +197,17 @@ p {
     display: block;
     font-size: 11px;
     font-family: 'Hanuman';
+    transition: background-color 250ms ease;
+    cursor: pointer;
     border: none;
 }
 .btn::before {
     content: '●';
     margin-right: 8px;
+}
+
+.btn:hover {
+    background-color: #f5c000;
 }
 
 .plant-card__badges {
@@ -312,14 +335,6 @@ p {
     font-size: 12px;
 }
 
-.input-download label{
-    padding: 4px 16px;
-    width: fit-content;
-    border-radius: 60px;
-    background-color: #7CB15B;
-    color: white;
-}
-
 .input-download input, .form-download__submit {
     display: none;
 }
@@ -337,9 +352,13 @@ p {
     text-transform: uppercase;
     display: block;
     font-size: 18px;
+    transition: background-color 250ms ease;
     font-family: 'Hanuman';
+    cursor: pointer;
 }
-
+.input-download label:hover {
+    background-color: #f5c000;
+}
 turbo-frame[busy] {
     opacity: 0.5;
 }
