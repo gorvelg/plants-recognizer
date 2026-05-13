@@ -3,11 +3,31 @@
 {% block title %}Hello IndexPlantController!{% endblock %}
 
 {% block body %}
-    <ul>
+    <ul class="plant__list">
         {% for plant in plants %}
-            <li>
-                <a href="{{ path('app_get_plant', {'plant': plant.id}) }}">
-                {{ plant.commonName }}
+            <li class="plant__item">
+                <a class="plant__link" href="{{ path('app_get_plant', {'plant': plant.id}) }}">
+
+                    {% set image = plantImages[plant.id] ?? null %}
+
+                    {% if image %}
+                        <img class="plant__img" src="{{ image.url }}" alt="{{ plant.commonName }}">
+                    {% endif %}
+                    <div class="plant__infos">
+                        <p class="plant__common-name">
+                            {{ plant.commonName }}
+                        </p>
+                        <p class="plant__scientific-name">
+                            {{ plant.scientificName }}
+                        </p>
+                        <p class="plant__exposure">
+                            {{ plant.exposureSmall }}
+                        </p>
+                        <p class="plant__watering">
+                            {{ plant.wateringSmall }}
+                        </p>
+                    </div>
+
                 </a>
             </li>
         {% endfor %}
