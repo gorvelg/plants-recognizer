@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexPlantController!{% endblock %}
+{% block title %}Mes plantes{% endblock %}
 
 {% block body %}
     <ul class="plant__list">
@@ -8,24 +8,32 @@
             <li class="plant__item">
                 <a class="plant__link" href="{{ path('app_get_plant', {'plant': plant.id}) }}">
 
-                    {% set image = plantImages[plant.id] ?? null %}
 
-                    {% if image %}
-                        <img class="plant__img" src="{{ image.url }}" alt="{{ plant.commonName }}">
-                    {% endif %}
+                    {% for attachment in plant.attachments %}
+                        <img
+                            class="plant__img"
+                            src="{{ asset(attachment.path) }}"
+                            alt="{{ attachment.altText|default('Photo de ' ~ plant.scientificName) }}"
+                        >
+                    {% endfor %}
                     <div class="plant__infos">
-                        <p class="plant__common-name">
-                            {{ plant.commonName }}
-                        </p>
-                        <p class="plant__scientific-name">
-                            {{ plant.scientificName }}
-                        </p>
-                        <p class="plant__exposure">
-                            {{ plant.exposureSmall }}
-                        </p>
-                        <p class="plant__watering">
-                            {{ plant.wateringSmall }}
-                        </p>
+                        <div class="plant__heading">
+                            <p class="plant__common-name">
+                                {{ plant.commonName }}
+                            </p>
+                            <p class="plant__scientific-name">
+                                {{ plant.scientificName }}
+                            </p>
+                        </div>
+                        <div class="plant details">
+                            <p class="plant__exposure">
+                                {{ plant.exposureSmall }}
+                            </p>
+                            <p class="plant__watering">
+                                {{ plant.wateringSmall }}
+                            </p>
+                        </div>
+
                     </div>
 
                 </a>
