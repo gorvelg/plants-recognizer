@@ -9,13 +9,21 @@
                 <a class="plant__link" href="{{ path('app_get_plant', {'plant': plant.id}) }}">
 
 
-                    {% for attachment in plant.attachments %}
+                    {% if plant.attachments is not empty %}
+                        {% for attachment in plant.attachments %}
+                            <img
+                                class="plant__img"
+                                src="{{ asset(attachment.path) }}"
+                                alt="{{ attachment.altText|default('Photo de ' ~ plant.scientificName) }}"
+                            >
+                        {% endfor %}
+                    {% else %}
                         <img
                             class="plant__img"
-                            src="{{ asset(attachment.path) }}"
-                            alt="{{ attachment.altText|default('Photo de ' ~ plant.scientificName) }}"
+                            src="{{ asset('images/placeholder.jpg') }}"
+                            alt="Image placeholder pour {{ plant.scientificName }}"
                         >
-                    {% endfor %}
+                    {% endif %}
                     <div class="plant__infos">
                         <div class="plant__heading">
                             <p class="plant__common-name">
