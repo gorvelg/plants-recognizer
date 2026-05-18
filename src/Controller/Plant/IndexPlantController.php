@@ -3,7 +3,6 @@
 namespace App\Controller\Plant;
 
 use App\Entity\Plant;
-use App\Service\WikipediaImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +16,7 @@ final class IndexPlantController extends AbstractController
     }
 
     #[Route('/index/plant', name: 'app_index_plant')]
-    public function index(WikipediaImageService $imageService): Response
+    public function index(): Response
     {
         $plants = $this->em->getRepository(Plant::class)->findAll();
 
