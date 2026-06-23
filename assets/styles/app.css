@@ -3,6 +3,8 @@
 :root {
     --sidebar-open-width: 330px;
     --sidebar-closed-width: 70px;
+    --padding-xl: 20px 40px;
+    --padding-sm: 15px;
 
     --sidebar-width: var(--sidebar-open-width);
     --content-offset: var(--sidebar-open-width);
@@ -10,6 +12,9 @@
     --sidebar-open-fz: 14px;
     --sidebar-closed-fz: 0px;
     --sidebar-fz: var(--sidebar-open-fz);
+
+    --padding: var(--padding-xl);
+
 }
 
 /* Mobile / tablette : fermée par défaut */
@@ -23,6 +28,13 @@
     body.sidebar-open {
         --sidebar-width: var(--sidebar-open-width);
         --sidebar-fz: var(--sidebar-open-fz);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --padding: var(--padding-sm);
+        --content-offset: 0px;
     }
 }
 
@@ -183,6 +195,10 @@ a {
         transform 0.3s ease;
 }
 
+.toggle-menu{
+    display: none;
+}
+
 @media screen and (max-width: 1024px) {
     .sidebar__logo,
     .sidebar__section-title {
@@ -208,14 +224,67 @@ a {
         opacity: 1;
         transform: translateX(0);
     }
+
+    .toggle-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border: none;
+        border-radius: 50%;
+        background: #F8F7F3;
+        cursor: pointer;
+    }
+
+    .toggle-menu::before {
+        content: '';
+        width: 20px;
+        height: 20px;
+
+        background-image: url("../icons/chevron-right.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        transition: transform 0.3s ease;
+    }
+
+    body.sidebar-open .toggle-menu::before {
+        transform: rotate(180deg);
+    }
+}
+@media screen and (max-width: 768px){
+    .sidebar {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: unset;
+        width: 100%;
+        height: auto;
+    }
+    .sidebar__menu {
+        display: flex;
+        gap: 0px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .sidebar__menu-label{
+        font-size: 0;
+    }
+    .toggle-menu {
+        display: none;
+    }
+
 }
 
 /* WRAPPER */
 
 .wrapper {
     margin-left: var(--content-offset);
-    padding: 40px;
+    padding: var(--padding);
 }
+
 
 /* TITLES */
 
@@ -245,6 +314,17 @@ p {
     line-height: 140%;
     color: #575757;
     font-weight: 400;
+}
+
+@media screen and (max-width: 768px){
+    h3 {
+        font-size: 20px;
+    }
+
+    p{
+        font-size: 16px;
+    }
+
 }
 
 /* OVERVIEW */
@@ -499,6 +579,13 @@ p {
     .card--autumn,
     .card--circle {
         grid-column: 1 / 3;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .card__icon svg {
+        height: 32px;
+        width: 32px;
     }
 }
 
