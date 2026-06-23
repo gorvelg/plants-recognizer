@@ -1,13 +1,12 @@
-<div class="card card--{{ category }}">
-    <div class="card__header">
-        {% if icon is defined and icon %}
-            <span class="card__icon">
-                {{ include('@icons/' ~ icon ~ '.svg') }}
-            </span>
-        {% endif %}
-
+<div class="card card--{{ category }} card--{{ icon }}">
+    {% if icon is defined and icon %}
+        <span class="card__icon">
+            {{ include('@icons/' ~ icon ~ '.svg') }}
+        </span>
+    {% endif %}
+    <div class="card__content">
         <h3 class="card__title">{{ title }}</h3>
+        <p class="card__text">{{ text }}</p>
     </div>
-
-    <p class="card__text">{{ text }}</p>
 </div>
+

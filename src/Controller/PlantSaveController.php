@@ -41,7 +41,7 @@ final class PlantSaveController extends AbstractController
         $image = $wikipediaImageService->getMainImageForPage($scientificName);
 
 
-        dump($image);
+//        dump($image);
 
 
         $plant = new Plant();

@@ -213,8 +213,8 @@
 
         <div class="cards-sections">
             {% for categoryKey, categoryTitle in categories %}
-                <section class="cards-section cards-section--{{ categoryKey }}">
-                    <h2 class="cards-section__title">{{ categoryTitle }}</h2>
+                <section class="cards-section cards-section--{{ categoryKey }} is-open" {{ stimulus_controller('card-accordion') }}>
+                    <h2 class="cards-section__title" {{ stimulus_action('card-accordion', 'toggle', 'click') }}>{{ categoryTitle }}</h2>
 
                     <div class="cards-section__grid">
                         {% for card in cards %}

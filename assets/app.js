@@ -8,4 +8,11 @@ import './stimulus_bootstrap.js';
 import './styles/app.css';
 import './scripts/download.js';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+const toggleBtn = document.querySelector('.toggle-menu');
+
+toggleBtn.addEventListener('click', () => {
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+        document.body.classList.toggle('sidebar-open');
+    }
+});
