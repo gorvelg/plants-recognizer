@@ -7,12 +7,6 @@ import './stimulus_bootstrap.js';
  */
 import './styles/app.css';
 import './scripts/download.js';
+import './scripts/sidebar_toggle.js';
 
 
-const toggleBtn = document.querySelector('.toggle-menu');
-
-toggleBtn.addEventListener('click', () => {
-    if (window.matchMedia('(max-width: 1024px)').matches) {
-        document.body.classList.toggle('sidebar-open');
-    }
-});

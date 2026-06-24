@@ -15,6 +15,14 @@
 
     --padding: var(--padding-xl);
 
+/* Font size */
+    --h1: 50px;
+    --h2: 40px;
+    --h3: 24px;
+    --md: 24px;
+    --base: 18px;
+    --sm: 16px;
+    --xs: 12px;
 }
 
 /* Mobile / tablette : fermée par défaut */
@@ -30,11 +38,21 @@
         --sidebar-fz: var(--sidebar-open-fz);
     }
 }
-
+@media screen and (max-width: 1024px){
+    :root {
+        --h1: 36px;
+        --h2: 30px;
+        --h3: 20px;
+    }
+}
 @media screen and (max-width: 768px) {
     :root {
         --padding: var(--padding-sm);
         --content-offset: 0px;
+
+
+        --md: 20px;
+        --base: 16px;
     }
 }
 
@@ -290,7 +308,7 @@ a {
 
 h1 {
     font-weight: bold;
-    font-size: 50px;
+    font-size: var(--h1);
     color: #496D4A;
     line-height: 110%;
 }
@@ -298,33 +316,28 @@ h1 {
 h2 {
     font-weight: bold;
     color: #496D4A;
-    font-size: 40px;
+    font-size: var(--h2);
     line-height: 110%;
 }
 
 h3 {
     font-weight: bold;
     color: #212121;
-    font-size: 24px;
+    font-size: var(--h3);
     line-height: 110%;
 }
 
 p {
-    font-size: 18px;
+    font-size: var(--base);
     line-height: 140%;
     color: #575757;
     font-weight: 400;
 }
 
 @media screen and (max-width: 768px){
-    h3 {
-        font-size: 20px;
+    .wrapper {
+        margin-bottom: calc(72px + 20px);
     }
-
-    p{
-        font-size: 16px;
-    }
-
 }
 
 /* OVERVIEW */
@@ -332,7 +345,7 @@ p {
 .overview {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 20px;
 }
 
 .plant-card__header-row {
@@ -361,14 +374,13 @@ p {
 .plant-card__common-name {
     font-weight: bold;
     color: #212121;
-    font-size: 40px;
     line-height: 110%;
 }
 
 .plant-card__scientific-name {
     font-weight: 200;
     color: #212121;
-    font-size: 24px;
+    font-size: var(--md);
     line-height: 110%;
     font-style: italic;
 }
@@ -422,7 +434,7 @@ p {
 
 .plant-card__badge--toxicity p {
     color: #F55258;
-    font-size: 12px;
+    font-size: var(--xs);
     line-height: 110%;
 }
 
@@ -474,7 +486,7 @@ p {
 
 .result-success p {
     color: #7CB15B;
-    font-size: 16px;
+    font-size: var(--sm);
 }
 
 @media screen and (max-width: 1600px) {
@@ -504,7 +516,18 @@ p {
         grid-column: 1 / 3;
     }
 }
-
+@media screen and (max-width: 768px) {
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        margin-bottom: 20px;
+    }
+    .plant-card__header-row{
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+}
 /* COMPONENTS */
 
 .cards-sections::before {
@@ -583,9 +606,17 @@ p {
 }
 
 @media screen and (max-width: 768px){
+    .detail-item, .card {
+        gap: 16px;
+    }
+    .detail-item svg,
     .card__icon svg {
         height: 32px;
         width: 32px;
+    }
+
+    .cards-section__title {
+        margin-block: 30px;
     }
 }
 
@@ -600,7 +631,7 @@ p {
 }
 
 .form-download__title {
-    font-size: 40px;
+    font-size: var(--h2);
     color: #212121;
     font-weight: bold;
     text-align: center;
@@ -608,7 +639,7 @@ p {
 
 .form-download__constraint {
     color: #9ca3af;
-    font-size: 12px;
+    font-size: var(--xs);
 }
 
 .input-download input,
@@ -629,7 +660,7 @@ p {
     color: #2C2825;
     text-transform: uppercase;
     display: block;
-    font-size: 18px;
+    font-size: var(--base);
     transition: background-color 250ms ease;
     font-family: 'Hanuman';
     cursor: pointer;
@@ -672,7 +703,7 @@ turbo-frame[busy] {
     margin: 0;
     font-weight: 700;
     font-family: 'Caprasimo';
-    font-size: 40px;
+    font-size: var(--h2);
     color: #212121;
 }
 
@@ -722,6 +753,26 @@ turbo-frame[busy] {
 .dashboard-card--recognizer:hover {
     background-color: #dbddd5;
 }
+
+@media screen and (max-width: 1224px){
+    .dashboard-card {
+        grid-column: 1 / -1;
+    }
+}
+
+
+@media screen and (max-width: 1024px){
+    .dashboard-card__clip {
+        background: #ffffff7d;
+        backdrop-filter: blur(6px);
+        z-index: 100;
+        padding: 8px 12px;
+        border-radius: 16px;
+        box-shadow: color(srgb 0 0 0 / 0.07) 0px 0px 8px 0px;
+    }
+}
+
+
 
 /* PLANT LIST */
 
@@ -800,4 +851,26 @@ turbo-frame[busy] {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+@media screen and (max-width: 1224px){
+    .plant__list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 550px){
+    .plant__link{
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+    }
+    .plant__infos{
+        padding: 0px 16px 5px;
+    }
+    .plant__img {
+        width: 100%;
+    }
+
 }
