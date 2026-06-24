@@ -42,6 +42,47 @@
         <span class="form-download__constraint">Supporte JPG, PNG, et WEBP, jusqu'à 8Mb</span>
         <button class="form-download__submit" type="submit">Envoyer</button>
         {{ form_end(form) }}
+        <div>Ou</div>
+        <button
+            class="camera-capture__button camera-capture__button--start"
+            type="button"
+            id="start-camera"
+        >
+            Ouvrir la caméra
+        </button>
+
+
+        <div class="camera-capture">
+            <div class="camera-capture__preview">
+                <video
+                    class="camera-capture__video"
+                    id="camera-preview"
+                    autoplay
+                    playsinline
+                ></video>
+
+                <div class="camera-capture__overlay">
+                    <div class="camera-capture__frame"></div>
+                    <p class="camera-capture__hint">Place la plante au centre</p>
+                </div>
+            </div>
+
+            <div class="camera-capture__actions">
+
+                <button
+                    class="camera-capture__button camera-capture__button--capture"
+                    type="button"
+                    id="take-photo"
+                >
+                </button>
+            </div>
+
+            <canvas
+                class="camera-capture__canvas"
+                id="photo-canvas"
+                hidden
+            ></canvas>
+        </div>
 
         {% if error %}
             <div>

@@ -874,3 +874,97 @@ turbo-frame[busy] {
     }
 
 }
+
+/* Camera */
+
+.camera-capture {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: absolute;
+    inset: 0;
+    height: 100vh;
+    background: white;
+}
+
+.camera-capture__preview {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: black;
+}
+
+.camera-capture__video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.camera-capture__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera-capture__frame {
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    border: 2px solid white;
+    border-radius: 24px;
+}
+
+.camera-capture__hint {
+    position: absolute;
+    bottom: 20px;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.camera-capture__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.camera-capture__button--capture {
+    border: 3px solid #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FFC800;
+    color: #2C2825;
+    text-transform: uppercase;
+    font-family: 'Hanuman';
+    cursor: pointer;
+    outline: 3px #ffc802 solid;
+}
+
+.camera-capture__canvas {
+    display: none;
+}
+
+.camera-capture__button--start {
+    padding: 8px 16px;
+    width: fit-content;
+    border-radius: 4px;
+    background-color: #FFC800;
+    color: #2C2825;
+    text-transform: uppercase;
+    display: block;
+    font-size: var(--base);
+    transition: background-color 250ms ease;
+    font-family: 'Hanuman';
+    cursor: pointer;
+}
+
+.camera-capture__button--start:hover {
+    background-color: #f5c000;
+}

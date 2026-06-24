@@ -8,5 +8,5 @@ import './stimulus_bootstrap.js';
 import './styles/app.css';
 import './scripts/download.js';
 import './scripts/sidebar_toggle.js';
-
+import './scripts/camera.js';
 

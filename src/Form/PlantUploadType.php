@@ -30,7 +30,11 @@ class PlantUploadType extends AbstractType
                             'image/webp',],
                         mimeTypesMessage: 'Merci d\'envoyer un fichier jpg, jpeg, webp'
                     )
-                ]
+                ],
+                'attr' => [
+                    'accept' => 'image/*',
+                    'id' => 'photo-input',
+                ],
 
             ])
         ;
