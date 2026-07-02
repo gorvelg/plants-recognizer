@@ -42,18 +42,10 @@
         <span class="form-download__constraint">Supporte JPG, PNG, et WEBP, jusqu'à 8Mb</span>
         <button class="form-download__submit" type="submit">Envoyer</button>
         {{ form_end(form) }}
-        <div>Ou</div>
-        <button
-            class="camera-capture__button camera-capture__button--start"
-            type="button"
-            id="start-camera"
-        >
-            Ouvrir la caméra
-        </button>
 
 
         <div class="camera-capture">
-            <div class="camera-capture__preview">
+            <div class="camera-capture__preview hidden">
                 <video
                     class="camera-capture__video"
                     id="camera-preview"
@@ -67,21 +59,23 @@
                 </div>
             </div>
 
-            <div class="camera-capture__actions">
-
-                <button
-                    class="camera-capture__button camera-capture__button--capture"
-                    type="button"
-                    id="take-photo"
-                >
-                </button>
-            </div>
-
             <canvas
-                class="camera-capture__canvas"
+                class="camera-capture__canvas hidden"
                 id="photo-canvas"
                 hidden
             ></canvas>
+
+            <div class="camera-capture__actions">
+                <button
+                    class="camera-capture__button camera-capture__button--start"
+                    type="button"
+                    id="camera-action"
+                >
+                    Ouvrir la caméra
+                </button>
+            </div>
+
+
         </div>
 
         {% if error %}
